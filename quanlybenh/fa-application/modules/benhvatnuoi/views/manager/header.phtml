@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<!--[if IE 9 ]><html class="ie9"><![endif]-->
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="format-detection" content="telephone=no"/>
+    <meta charset="UTF-8"/>
+    <title><?php echo $this->data('view_title') ?></title>
+
+    <link href="<?php echo CUR_MODULE_URL ?>/views/manager/assets/vendors/bower_components/animate.css/animate.min.css" rel="stylesheet"/>
+    <link href="<?php echo CUR_MODULE_URL ?>/views/manager/assets/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet"/>
+    <link href="<?php echo CUR_MODULE_URL ?>/views/manager/assets/vendors/bower_components/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet">
+    <link href="<?php echo CUR_MODULE_URL ?>/views/manager/assets/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
+    <link href="<?php echo CUR_MODULE_URL ?>/views/manager/assets/vendors/chosen_v1.4.2/chosen.min.css" rel="stylesheet"/>
+    <link href="<?php echo CUR_MODULE_URL ?>/views/manager/assets/css/app.min.css" rel="stylesheet"/>
+
+    <?php if (isset($append_header)) echo $append_header; ?>
+</head>
+<body>
+<header id="header" class="clearfix" data-spy="affix" data-offset-top="65">
+    <ul class="header-inner">
+
+        <!-- Logo -->
+        <li class="logo">
+            <a href="#">Quản lý bệnh</a>
+            <div id="menu-trigger"><i class="zmdi zmdi-menu"></i></div>
+        </li>
+
+        <?php $this->load->helper('counter') ?>
+		<li>
+            <a href="<?php echo BASE_URL ?>manager/species" title="Danh sách loài">
+                <i class="zmdi zmdi-accounts-list-alt"></i>
+                <i class="hi-count bg-orange"><?php echo counter('species') ?></i>
+            </a>
+        </li>
+		
+		<li>
+            <a href="<?php echo BASE_URL ?>manager/breeds" title="Danh sách giống">
+                <i class="zmdi zmdi-airline-seat-flat-angled"></i>
+                <i class="hi-count bg-blue"><?php echo counter('breed') ?></i>
+            </a>
+        </li>
+		
+		<li>
+            <a href="<?php echo BASE_URL ?>manager/diseases_group" title="Danh sách nhóm bệnh">
+                <i class="zmdi zmdi-group-work"></i>
+                <i class="hi-count bg-green"><?php echo counter('diseases_group') ?></i>
+            </a>
+        </li>
+		
+        <li>
+            <a href="<?php echo BASE_URL ?>manager/diseases" title="Danh sách bệnh">
+                <i class="zmdi zmdi-collection-text"></i>
+                <i class="hi-count"><?php echo counter('diseases') ?></i>
+            </a>
+        </li>
+     
+        <li>
+            <a href="<?php echo BASE_URL ?>manager/accounts" title="Danh sách admin">
+                <i class="zmdi zmdi-accounts"></i>
+                <i class="hi-count bg-cyan"><?php echo counter('account') ?></i>
+            </a>
+        </li>
+
+
+
+        <!-- Settings -->
+        <li class="pull-right dropdown hidden-xs">
+            <a href="#" data-toggle="dropdown">
+                <i class="zmdi zmdi-more-vert"></i>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a data-toggle="fullscreen" href="#">Chế độ toàn màn hình</a></li>
+                <li><a href="<?php echo BASE_URL ?>manager/accounts">Quản lý tài khoản</a></li>
+                <li><a href="<?php echo BASE_URL ?>manager/logout">Đăng xuất</a></li>
+            </ul>
+        </li>
+
+        <!-- Quick Apps -->
+        <li class="hidden-xs dropdown pull-right">
+            <a href="#" data-toggle="dropdown">
+                <i class="zmdi zmdi-apps"></i>
+            </a>
+
+            <div class="dropdown-menu pull-right" id="launch-apps">
+                <div class="dropdown-header bg-teal">Menu nhanh</div>
+
+                <div class="la-body">
+                    <div class="lab-item">
+                        <a href="<?php echo BASE_URL ?>manager" class="bg-teal">
+                            <i class="zmdi zmdi-home"></i>
+                        </a>
+                        <small>Thống kê</small>
+                    </div>
+					
+					<div class="lab-item">
+                        <a href="<?php echo BASE_URL ?>manager/species/add" class="bg-orange" title="Thêm loài">
+                            <i class="zmdi zmdi-accounts-list-alt"></i>
+                        </a>
+                        <small>Loài</small>
+                    </div>
+					
+					<div class="lab-item">
+                        <a href="<?php echo BASE_URL ?>manager/breeds/add" class="bg-blue" title="Thêm giống">
+                            <i class="zmdi zmdi-airline-seat-flat-angled"></i>
+                        </a>
+                        <small>Giống</small>
+                    </div>
+					
+					<div class="lab-item">
+                        <a href="<?php echo BASE_URL ?>manager/diseases_group/add" class="bg-green" title="Thêm nhóm bệnh">
+                            <i class="zmdi zmdi-group-work"></i>
+                        </a>
+                        <small>N bệnh</small>
+                    </div>
+
+                    <div class="lab-item">
+                        <a href="<?php echo BASE_URL ?>manager/diseases/add" class="bg-red" title="Thêm bệnh">
+                            <i class="zmdi zmdi-collection-text"></i>
+                        </a>
+                        <small>Bệnh</small>
+                    </div>
+
+                    <div class="lab-item">
+                        <a href="<?php echo BASE_URL ?>manager/accounts/add" class="bg-cyan" title="Thêm tài khoản admin">
+                            <i class="zmdi zmdi-accounts"></i>
+                        </a>
+                        <small>Admin</small>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <!-- Time -->
+        <li class="pull-right hidden-xs">
+            <div id="time">
+                <span id="t-hours"></span>
+                <span id="t-min"></span>
+                <span id="t-sec"></span>
+            </div>
+        </li>
+    </ul>
+</header>
+<aside id="sidebar">
+
+    <!--| MAIN MENU |-->
+    <ul class="side-menu">
+        <li class="sm-sub sms-profile">
+            <a class="clearfix" href="#">
+                <img src="<?php echo CUR_MODULE_URL ?>/views/manager/assets/img/profile-pic.png" alt="Avatar"/>
+                <span class="f-11">
+                    <span class="d-block"><?php echo user('fullname') ? user('fullname') : user('username')?></span>
+                    <small class="text-lowercase">@<?php echo user('username') ?></small>
+                </span>
+            </a>
+            <ul>
+                <li><a href="<?php echo BASE_URL ?>manager/logout">Đăng xuất</a></li>
+            </ul>
+        </li>
+
+        <li<?php echo (CUR_ACTION == 'index' ? ' class="active"' : '')?>>
+            <a href="<?php echo BASE_URL ?>manager">
+                <i class="zmdi zmdi-home"></i>
+                <span>Trang tổng quan</span>
+            </a>
+        </li>
+        <li class="sm-sub<?php echo (CUR_ACTION == 'species' ? ' active' : '')?>">
+            <a href="<?php echo BASE_URL ?>manager/species">
+                <i class="zmdi zmdi-accounts-list-alt"></i>
+                <span>Quản lý loài</span>
+            </a>
+            <ul>
+                <li><a href="<?php echo BASE_URL ?>manager/species">Danh sách loài</a></li>
+                <li><a href="<?php echo BASE_URL ?>manager/species/add">Thêm loài</a></li>
+            </ul>
+        </li>
+        <li class="sm-sub<?php echo (CUR_ACTION == 'breeds' ? ' active' : '')?>">
+            <a href="#">
+                <i class="zmdi zmdi-airline-seat-flat-angled"></i>
+                <span>Quản lý giống</span>
+            </a>
+            <ul>
+                <li><a href="<?php echo BASE_URL ?>manager/breeds">Danh sách giống</a></li>
+                <li><a href="<?php echo BASE_URL ?>manager/breeds/add">Thêm giống</a></li>
+            </ul>
+        </li>
+        <li class="sm-sub<?php echo (CUR_ACTION == 'diseases_group' ? ' active' : '')?>">
+            <a href="#">
+                <i class="zmdi zmdi-group-work"></i>
+                <span>Quản lý nhóm bệnh</span>
+            </a>
+            <ul>
+                <li><a href="<?php echo BASE_URL ?>manager/diseases_group">Danh sách nhóm bệnh</a></li>
+                <li><a href="<?php echo BASE_URL ?>manager/diseases_group/add">Thêm nhóm bệnh</a></li>
+            </ul>
+        </li>
+        <li class="sm-sub<?php echo (CUR_ACTION == 'diseases' ? ' active' : '')?>">
+            <a href="#">
+                <i class="zmdi zmdi-collection-text"></i>
+                <span>Quản lý bệnh</span>
+            </a>
+            <ul>
+                <li><a href="<?php echo BASE_URL ?>manager/diseases">Danh sách bệnh</a></li>
+                <li><a href="<?php echo BASE_URL ?>manager/diseases/add">Thêm bệnh</a></li>
+            </ul>
+        </li>
+        <li class="sm-sub<?php echo (CUR_ACTION == 'accounts' ? ' active' : '')?>">
+            <a href="#">
+                <i class="zmdi zmdi-accounts"></i>
+                <span>Quản lý admin</span>
+            </a>
+            <ul>
+                <li><a href="<?php echo BASE_URL ?>manager/accounts">Danh sách admin</a></li>
+                <li><a href="<?php echo BASE_URL ?>manager/accounts/add">Thêm admin</a></li>
+            </ul>
+        </li>
+    </ul>
+</aside>
+
+<section id="content">
+    <div class="container">

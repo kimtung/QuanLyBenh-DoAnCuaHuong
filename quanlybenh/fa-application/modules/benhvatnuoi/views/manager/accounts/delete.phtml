@@ -1,0 +1,35 @@
+<?php
+/**
+ * @var array $user
+ */
+?>
+<?php $this->layout('/manager/header') ?>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="tile">
+                <div class="action-header clearfix">
+                    <h1 class="ah-label">Xóa tài khoản</h1>
+                    <ul class="ah-actions actions">
+                        <li><a href="<?php echo BASE_URL ?>manager/accounts" title="Trở lại"><i class="zmdi zmdi-arrow-left"></i></a></li>
+                    </ul>
+                </div>
+                <div class="t-body tb-padding">
+                    <?php $this->layout('message') ?>
+                    <form method="POST">
+                        <div class="form-group">
+                            <label class="control-label">Tài khoản</label>
+                            <input type="text" class="form-control" name="username" disabled value="<?php echo $user['username'] ?>"/>
+                        </div>
+                        <div class="alert alert-warning">
+                            Bạn có chắc chắn muốn xóa tài khoản này không?
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" name="submit-delete" value="Đồng ý xóa tài khoản"/>
+                            <a href="<?php echo BASE_URL ?>manager/accounts" class="btn btn-default">Trở lại</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php $this->layout('/manager/footer') ?>

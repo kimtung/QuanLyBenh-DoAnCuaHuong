@@ -1,0 +1,12 @@
+RewriteEngine On
+# Path of the working directory
+# Example: http://localhost/ => RewriteBase /
+# If working directory is http://localhost/framework-awesome/ => RewriteBase /framework-awesome/
+RewriteBase /quanlybenh/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !/index.php$
+RewriteRule ^(.*)$ index.php [L,QSA]
+# Band ip
+order allow,deny
+allow from all

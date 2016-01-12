@@ -1,0 +1,289 @@
+/* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic,700&subset=latin,vietnamese);
+
+body {
+    padding-bottom: 40px;
+    color: black;
+    font-family: 'Open Sans', sans-serif;
+}
+a, a:hover, a:active, a:focus {
+    text-decoration: none;
+}
+.header {
+    text-align: center;
+}
+.header > a.logo {
+    padding: 20px 100px;
+    background: rgba(6,128,175,0.5);
+    color: #fff;
+    font-size: 50px;
+    text-transform: uppercase;
+    border-radius: 20px;
+}
+
+/* CUSTOMIZE THE NAVBAR
+-------------------------------------------------- */
+
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+.navbar-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 20;
+}
+
+/* Flip around the padding for proper display in narrow viewports */
+.navbar-wrapper > .container {
+    padding-right: 0;
+    padding-left: 0;
+}
+.navbar-wrapper .navbar {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.navbar-wrapper .navbar .container {
+    width: auto;
+}
+
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+/* Carousel base class */
+.carousel.carousel-cover {
+    height: 700px;
+    margin-bottom: 60px;
+}
+.carousel.carousel-cover-min {
+    height: 440px;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+    z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel.carousel-cover .item {
+    height: 700px;
+    background-color: #777;
+    text-align: center;
+}
+.carousel.carousel-cover-min .item {
+    height: 440px;
+}
+.carousel-inner > .item > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+}
+.carousel-cover-min .carousel-caption {
+    padding-bottom: 0;
+    bottom: 10px;
+}
+.carousel-cover .carousel-caption h1 {
+    margin: 30px;
+    text-transform: uppercase;
+    color: #FDFDFD;
+}
+
+.carousel-cover .carousel-caption .form-control {
+    background: rgba(236, 236, 236, 0.5);
+    border-color: rgba(208, 203, 203, 0.5);
+    color: #FDFDFD;
+    font-weight: 500;
+    text-align: center;
+}
+.carousel-cover .carousel-caption .form-control.input-lg {
+    height: 70px;
+    font-size: 25px;
+}
+
+.carousel-cover .carousel-caption .form-control::-webkit-input-placeholder
+{
+    color: #FDFDFD;
+    text-transform: uppercase;
+}
+
+.carousel-cover .carousel-caption .form-control:-moz-placeholder
+{
+    color: #FDFDFD;
+    text-transform: uppercase;
+}
+
+.carousel-cover .carousel-caption .form-control::-moz-placeholder
+{
+    color: #FDFDFD;
+    text-transform: uppercase;
+}
+
+.carousel-cover .carousel-caption .form-control:-ms-input-placeholder
+{
+    color: #FDFDFD;
+    text-transform: uppercase;
+}
+
+.carousel-cover .carousel-caption .btn {
+    background: rgba(4, 185, 195, 0.6);
+    border-color: rgb(0, 150, 158);
+    font-weight: 600;
+}
+.carousel-cover .carousel-caption .btn:hover,
+.carousel-cover .carousel-caption .btn:active,
+.carousel-cover .carousel-caption .btn:focus {
+    background: rgba(4, 185, 195, 1);
+}
+.carousel-cover .carousel-caption .btn.btn-lg {
+    padding: 15px 16px;
+    text-transform: uppercase;
+}
+
+/* PAGE WRAPPER
+-------------------------------------------------- */
+.page-pre-header {
+    text-align: center;
+    font-size: 25px;
+}
+.page-header {
+    padding-bottom: 15px;
+    margin: 20px 0 20px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
+.page-header .scientific_name {
+    display: block;
+    margin-top: 15px;
+    font-weight: 100;
+    color: #7D7D7D;
+}
+
+/* MARKETING CONTENT
+-------------------------------------------------- */
+
+/* Center align the text within the three columns below the carousel */
+.marketing .col-lg-4 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+.marketing h2 {
+    font-weight: normal;
+}
+.marketing .col-lg-4 p {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+
+/* Featurettes
+------------------------- */
+
+.featurette-divider {
+    margin: 80px 0; /* Space out the Bootstrap <hr> more */
+}
+
+/* Thin out the marketing headings */
+.featurette-heading {
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -1px;
+}
+
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+
+@media (min-width: 768px) {
+    /* Navbar positioning foo */
+    .navbar-wrapper {
+        margin-top: 40px;
+    }
+    .navbar-wrapper .container {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+    .navbar-wrapper .navbar {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    /* The navbar becomes detached from the top, so we round the corners */
+    .navbar-wrapper .navbar {
+        border-radius: 4px;
+    }
+
+    /* Bump up size of carousel content */
+    .carousel-caption p {
+        margin-bottom: 20px;
+        font-size: 21px;
+        line-height: 1.4;
+    }
+
+    .featurette-heading {
+        font-size: 50px;
+    }
+}
+
+@media (min-width: 992px) {
+    .featurette-heading {
+        margin-top: 120px;
+    }
+}
+
+
+.thumbnail > a {
+    display: block;
+    max-height: 170px;
+    overflow: hidden;
+}
+.thumbnail .caption > p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+.thumbnail .caption > .caption-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.page-thumbnail img {
+    max-width: 100%;
+}
+
+.featurette-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+ul.menu {
+    list-style-type: none;
+    margin: 50px 0;
+    padding: 0;
+    text-align: center;
+}
+ul.menu > li {
+    display: inline-block;
+}
+ul.menu > li > a {
+    padding: 20px;
+    margin-left: 50px;
+    display: inline-block;
+    background: rgba(6,128,175,0.5);
+    color: #fff;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 15px;
+}
+ul.menu > li:first-child > a {
+    margin-left: 0;
+}
+ul.menu > li > a:hover {
+    background: rgb(6,128,175);
+}

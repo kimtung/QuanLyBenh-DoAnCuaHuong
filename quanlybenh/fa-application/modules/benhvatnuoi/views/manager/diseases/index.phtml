@@ -1,0 +1,90 @@
+<?php
+/**
+ * @var \FA\MODELS\M_BENHVATNUOI\diseases $DSS
+ * @var \FA\MODELS\M_BENHVATNUOI\diseases_group $DSS_GR
+ * @var \FA\MODELS\M_BENHVATNUOI\breed $BR
+ * @var \FA\MODELS\M_BENHVATNUOI\species $SPC
+ */
+?>
+<?php $this->layout('/manager/header') ?>
+    <div class="tile">
+        <div class="action-header clearfix">
+            <h1 class="ah-label">Danh sách bệnh</h1>
+            <ul class="ah-actions actions">
+                <li><a href="<?php echo BASE_URL ?>manager/diseases/add" title="Thêm bệnh"><i class="zmdi zmdi-plus-circle"></i></a></li>
+            </ul>
+        </div>
+        <div class="t-body">
+            <?php $DSS->lists(array('limit' => 10, 'page' => $page, 'page_url' => $page_url)); ?>
+            <?php if ($DSS->has_result('lists')): ?>
+                <table class="table table-bordered table-vmiddle bootgrid-table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên bệnh</th>
+                        <th>Thuộc nhóm</th>
+                        <th>Thuộc giống</th>
+                        <th>Thuộc loài</th>
+                        <th>Ảnh minh họa</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <?php while ($disease = $DSS->fetch('lists')): ?>
+                        <tr>
+                            <td><?php echo $disease['id'] ?></td>
+                            <td><?php echo $disease['name'] ?></td>
+                            <td>
+                                <?php if ($DSS_GR->id_exists($disease['gid'])): ?>
+                                    <?php $gr = $DSS_GR->data($disease['gid'], 'name, bid'); ?>
+                                    <?php echo $gr['name'] ?>
+                                <?php else: ?>
+                                    N/A
+                                <?php endif ?>
+                            </td>
+                            <td>
+                                <?php if (isset($gr) && $BR->id_exists($gr['bid'])): ?>
+                                    <?php $breed = $BR->data($gr['bid'], 'name, sid'); ?>
+                                    <?php echo $breed['name'] ?>
+                                <?php else: ?>
+                                    N/A
+                                <?php endif ?>
+                            </td>
+                            <td>
+                                <?php if (isset($breed) && $SPC->id_exists($breed['sid'])): ?>
+                                    <?php $species = $SPC->data($breed['sid'], 'name'); ?>
+                                    <?php echo $species['name'] ?>
+                                <?php else: ?>
+                                    N/A
+                                <?php endif ?>
+                            </td>
+                            <td>
+                                <?php if ($disease['full_thumbnail']): ?>
+                                    <img src="<?php echo $disease['full_thumbnail'] ?>?v=<?php echo time() ?>" class="img-thumbnail thumb"/>
+                                <?php else: ?>
+                                    N/A
+                                <?php endif ?>
+                            </td>
+                            <td>
+                                <a href="<?php echo BASE_URL ?>manager/diseases/edit/<?php echo $disease['id'] ?>" title="Chỉnh sửa">
+                                    <button class="btn btn-icon btn-info command-edit"><span class="zmdi zmdi-edit"></span></button>
+                                </a>
+                                <a href="<?php echo BASE_URL ?>manager/diseases/delete/<?php echo $disease['id'] ?>" title="Xóa nhóm bệnh này">
+                                    <button class="btn btn-icon btn-info command-delete"><span class="zmdi zmdi-delete"></span></button>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endwhile ?>
+                </table>
+                <?php if ($DSS->paging('lists')): ?>
+                    <div class="bootgrid-footer container-fluid">
+                        <?php echo $DSS->paging('lists') ?>
+                    </div>
+                <?php endif ?>
+            <?php else: ?>
+                <div class="tb-padding">
+                    <div class="alert alert-info">Không có bệnh nào</div>
+                </div>
+            <?php endif ?>
+        </div>
+    </div>
+<?php $this->layout('/manager/footer') ?>

@@ -1,0 +1,55 @@
+<?php
+/**
+ * @var \FA\MODELS\M_BENHVATNUOI\species $SPC
+ */
+?>
+<?php $this->layout('/manager/header') ?>
+    <div class="tile">
+        <div class="action-header clearfix">
+            <h1 class="ah-label">Quản lý loài</h1>
+            <ul class="ah-actions actions">
+                <li><a href="<?php echo BASE_URL ?>manager/species/add" title="Thêm loài"><i class="zmdi zmdi-plus-circle"></i></a></li>
+            </ul>
+        </div>
+        <div class="t-body">
+            <?php $SPC->lists(); ?>
+            <?php if ($SPC->has_result('lists')): ?>
+                <table class="table table-bordered table-vmiddle bootgrid-table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên loài</th>
+                        <th>Ảnh minh họa</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <?php while ($species = $SPC->fetch('lists')): ?>
+                        <tr>
+                            <td><?php echo $species['id'] ?></td>
+                            <td><?php echo $species['name'] ?></td>
+                            <td>
+                                <?php if ($species['full_thumbnail']): ?>
+                                    <img src="<?php echo $species['full_thumbnail'] ?>?v=<?php echo time() ?>" class="img-thumbnail thumb"/>
+                                <?php else: ?>
+                                    N/A
+                                <?php endif ?>
+                            </td>
+                            <td>
+                                <a href="<?php echo BASE_URL ?>manager/species/edit/<?php echo $species['id'] ?>" title="Chỉnh sửa">
+                                    <button class="btn btn-icon btn-info command-edit"><span class="zmdi zmdi-edit"></span></button>
+                                </a>
+                                <a href="<?php echo BASE_URL ?>manager/species/delete/<?php echo $species['id'] ?>" title="Xóa loài này">
+                                    <button class="btn btn-icon btn-info command-delete"><span class="zmdi zmdi-delete"></span></button>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endwhile ?>
+                </table>
+            <?php else: ?>
+                <div class="tb-padding">
+                    <div class="alert alert-info">Không có loài nào</div>
+                </div>
+            <?php endif ?>
+        </div>
+    </div>
+<?php $this->layout('/manager/footer') ?>

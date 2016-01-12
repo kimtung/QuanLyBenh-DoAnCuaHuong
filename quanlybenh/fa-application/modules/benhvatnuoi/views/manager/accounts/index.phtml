@@ -1,0 +1,51 @@
+<?php
+/**
+ * @var \FA\MODELS\M_BENHVATNUOI\account $ACC
+ */
+?>
+<?php $this->layout('/manager/header') ?>
+    <div class="tile">
+        <div class="action-header clearfix">
+            <h1 class="ah-label">Danh sách admin</h1>
+            <ul class="ah-actions actions">
+                <li><a href="<?php echo BASE_URL ?>manager/accounts/add" title="Thêm người quản lý"><i class="zmdi zmdi-plus-circle"></i></a></li>
+            </ul>
+        </div>
+        <div class="t-body">
+            <?php $ACC->list_users() ?>
+            <?php if ($ACC->has_result('list_users')): ?>
+                <table class="table table-bordered table-vmiddle bootgrid-table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên đăng nhập</th>
+                        <th>Tên đầy đủ</th>
+                        <th>Email</th>
+                        <th>Số điện thoại</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <?php while ($user = $ACC->fetch('list_users')): ?>
+                        <tr>
+                            <td><?php echo $user['id'] ?></td>
+                            <td><?php echo $user['username'] ?></td>
+                            <td><?php echo $user['fullname'] ?></td>
+                            <td><?php echo $user['email'] ?></td>
+                            <td><?php echo $user['phone'] ? $user['phone'] : 'N/A' ?></td>
+                            <td>
+                                <a href="<?php echo BASE_URL ?>manager/accounts/edit/<?php echo $user['id'] ?>" title="Chỉnh sửa">
+                                    <button class="btn btn-icon btn-info command-edit"><span class="zmdi zmdi-edit"></span></button>
+                                </a>
+                                <?php if (USER_ID != $user['id'] && $user['protected'] == '0'): ?>
+                                    <a href="<?php echo BASE_URL ?>manager/accounts/delete/<?php echo $user['id'] ?>" title="Xóa tài khoản này">
+                                        <button class="btn btn-icon btn-info command-delete"><span class="zmdi zmdi-delete"></span></button>
+                                    </a>
+                                <?php endif ?>
+                            </td>
+                        </tr>
+                    <?php endwhile ?>
+                </table>
+            <?php endif ?>
+        </div>
+    </div>
+<?php $this->layout('/manager/footer') ?>

@@ -1,0 +1,74 @@
+<?php
+/**
+ * @var \FA\MODELS\M_BENHVATNUOI\breed $BR
+ * @var \FA\MODELS\M_BENHVATNUOI\diseases_group $DSS_GR
+ * @var \FA\MODELS\M_BENHVATNUOI\species $SPC
+ */
+?>
+<?php $this->layout('/manager/header', array('append_header' => '<link href="' . CUR_MODULE_URL . '/views/manager/assets/vendors/bower_components/summernote/dist/summernote.css" rel="stylesheet">')) ?>
+    <div class="tile">
+        <div class="action-header clearfix">
+            <h1 class="ah-label">Thêm nhóm bệnh mới</h1>
+            <ul class="ah-actions actions">
+                <li><a href="<?php echo BASE_URL ?>manager/diseases_group" title="Trở lại"><i class="zmdi zmdi-arrow-left"></i></a></li>
+            </ul>
+        </div>
+        <div class="t-body tb-padding">
+            <?php $this->layout('message') ?>
+            <form method="POST" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Chọn giống</label>
+                            <select name="bid" class="tag-select form-control" data-placeholder="Chọn giống cho nhóm bệnh mới">
+                                <option></option>
+                                <?php $SPC->lists() ?>
+                                <?php while ($s = $SPC->fetch('lists')): ?>
+                                    <optgroup label="<?php echo $s['name'] ?>">
+                                        <?php $BR->lists(array('sid' => $s['id'])) ?>
+                                        <?php while ($b = $BR->fetch('lists')): ?>
+                                            <option value="<?php echo $b['id'] ?>"><?php echo $b['name'] ?></option>
+                                        <?php endwhile ?>
+                                    </optgroup>
+                                <?php endwhile ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Tên nhóm bệnh</label>
+                            <input type="text" class="form-control" name="name" placeholder="Nhập tên nhóm bệnh"/>
+                            <div class="help-block pull-right">Ví dụ: Bệnh ký sinh trùng, Bệnh truyền nhiễm...</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Ảnh minh họa</label>
+                            <input type="file" class="form-control" name="thumbnail"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-6"></div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Mô tả</label>
+                    <textarea name="description" id="description" rows="10" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" name="submit-add" value="Thêm nhóm bệnh"/>
+                    <a href="<?php echo BASE_URL ?>manager/diseases_group" class="btn btn-default">Trở lại</a>
+                </div>
+            </form>
+        </div>
+    </div>
+<?php
+$append_footer = '<script src="' . CUR_MODULE_URL . '/views/manager/assets/vendors/bower_components/summernote/dist/summernote.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#description").summernote({
+            /*
+            onKeyup: function(e) {
+                $("#description").val($("#description-editor").code());
+            },
+            */
+            height: 150
+        });
+    });
+</script>'
+?>
+<?php $this->layout('/manager/footer', array('append_footer' => $append_footer)) ?>

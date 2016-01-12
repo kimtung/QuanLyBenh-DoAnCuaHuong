@@ -1,0 +1,51 @@
+<?php $this->layout('/manager/header') ?>
+<header class="page-header">
+    <h3>Trang tổng quan</h3>
+</header>
+	<div class="col-md-3 col-sm-6">
+        <div class="o-item bg-bluegray">
+            <div class="oi-title">
+                <span>Số loài đã tạo</span>
+            </div>
+            <div class="oi-body text-center">
+                <span class="oi-number"><?php echo counter('species') ?></span>
+            </div>
+        </div>
+    </div>
+	
+	 <div class="col-md-3 col-sm-6">
+        <div class="o-item bg-green">
+            <div class="oi-title">
+                <span>Số giống đã tạo</span>
+            </div>
+            <div class="oi-body text-center">
+                <span class="oi-number"><?php echo counter('breed') ?></span>
+            </div>
+        </div>
+    </div>
+	
+<div class="col-md-3 col-sm-6">
+        <div class="o-item bg-amber">
+            <div class="oi-title">
+                <span>Số nhóm bênh đã tạo</span>
+            </div>
+            <div class="oi-body text-center">
+                <span class="oi-number"><?php echo counter('diseases_group') ?></span>
+            </div>
+        </div>
+    </div>
+	
+	<div class="overview row">
+    <div class="col-md-3 col-sm-6">
+        <div class="o-item bg-cyan">
+            <div class="oi-title">
+                <span>Số bệnh đã tạo</span>
+            </div>
+            <div class="oi-body text-center">
+                <span class="oi-number"><?php echo counter('diseases') ?></span>
+            </div>
+        </div>
+    </div>
+
+</div>
+<?php $this->layout('/manager/footer') ?>

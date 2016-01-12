@@ -1,0 +1,114 @@
+<?php
+/**
+ * @var \FA\MODELS\M_BENHVATNUOI\diseases $DSS
+ * @var \FA\MODELS\M_BENHVATNUOI\diseases_group $DSS_GR
+ * @var \FA\MODELS\M_BENHVATNUOI\breed $BR
+ * @var \FA\MODELS\M_BENHVATNUOI\species $SPC
+ * @var array $dss
+ */
+?>
+<?php $this->layout('/manager/header', array('append_header' => '<link href="' . CUR_MODULE_URL . '/views/manager/assets/vendors/bower_components/summernote/dist/summernote.css" rel="stylesheet">')) ?>
+    <div class="tile">
+        <div class="action-header clearfix">
+            <h1 class="ah-label">Chỉnh sửa bệnh</h1>
+            <ul class="ah-actions actions">
+                <li><a href="<?php echo BASE_URL ?>manager/diseases/add" title="Thêm bệnh mới"><i class="zmdi zmdi-plus-circle"></i></a></li>
+                <li><a href="<?php echo BASE_URL ?>manager/diseases" title="Trở lại"><i class="zmdi zmdi-arrow-left"></i></a></li>
+            </ul>
+        </div>
+        <div class="t-body tb-padding">
+            <?php $this->layout('message') ?>
+            <form method="POST" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Chọn nhóm bệnh</label>
+                            <select name="gid" class="tag-select form-control" data-placeholder="Chọn nhóm bệnh">
+                                <option></option>
+                                <?php $BR->lists() ?>
+                                <?php while ($breed = $BR->fetch('lists')): ?>
+                                    <optgroup label="<?php echo $breed['name'] ?>">
+                                        <?php $DSS_GR->lists(array('bid' => $breed['id'])) ?>
+                                        <?php while ($gr = $DSS_GR->fetch('lists')): ?>
+                                            <option value="<?php echo $gr['id'] ?>"<?php echo ($dss['gid'] == $gr['id'] ? ' selected':'') ?>><?php echo $gr['name'] ?></option>
+                                        <?php endwhile ?>
+                                    </optgroup>
+                                <?php endwhile ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Tên bệnh</label>
+                            <input type="text" class="form-control" name="name" placeholder="Nhập tên bệnh" value="<?php echo $dss['name'] ?>"/>
+                            <div class="help-block pull-right">Ví dụ: Bệnh Gumboro...</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Tên khoa học</label>
+                            <input type="text" class="form-control" name="scientific_name" placeholder="Nhập tên khoa học" value="<?php echo $dss['scientific_name'] ?>"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Video</label>
+                            <input type="text" class="form-control" name="video" placeholder="Nhập link video" value="<?php echo $dss['video'] ?>"/>
+                            <div class="help-block pull-right">Link video từ <a href="http://youtube.com" target="_blank">Youtube</a></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Ảnh minh họa</label>
+                            <input type="file" class="form-control" name="thumbnail"/>
+                        </div>
+                        <?php if ($dss['full_thumbnail']): ?>
+                            <div class="form-group">
+                                <p class="form-control-static">
+                                    <span class="thumbnail"><img src="<?php echo $dss['full_thumbnail'] . '?v=' . time() ?>" class="img-responsive img-rounded"/></span>
+                                </p>
+                            </div>
+                        <?php endif ?>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="control-label">Triệu chứng</label>
+                            <textarea class="form-control" name="symptoms" rows="3" placeholder="Mô tả triệu chứng của bệnh"><?php echo $dss['symptoms'] ?></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Bệnh tích</label>
+                            <textarea class="form-control" name="lesions" rows="3" placeholder="Mô tả bệnh tích"><?php echo $dss['lesions'] ?></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Điều trị</label>
+                            <textarea class="form-control" name="treatments" rows="3" placeholder="Mô tả cách điều trị"><?php echo $dss['treatments'] ?></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Cách phòng tránh</label>
+                            <textarea class="form-control" name="prevention" rows="3" placeholder="Mô tả cách phòng tránh"><?php echo $dss['prevention'] ?></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Bệnh liên quan</label>
+                            <textarea class="form-control" name="related" rows="3" placeholder="Một vài bệnh liên quan"><?php echo $dss['related'] ?></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Mô tả</label>
+                    <textarea name="description" id="description" rows="10" class="form-control"><?php echo $dss['description'] ?></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" name="submit-edit" value="Lưu thay đổi"/>
+                    <a href="<?php echo BASE_URL ?>manager/diseases" class="btn btn-default">Trở lại</a>
+                </div>
+            </form>
+        </div>
+    </div>
+<?php
+$append_footer = '<script src="' . CUR_MODULE_URL . '/views/manager/assets/vendors/bower_components/summernote/dist/summernote.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#description").summernote({
+            /*
+            onKeyup: function(e) {
+                $("#description").val($("#description-editor").code());
+            },
+            */
+            height: 300
+        });
+    });
+</script>'
+?>
+<?php $this->layout('/manager/footer', array('append_footer' => $append_footer)) ?>

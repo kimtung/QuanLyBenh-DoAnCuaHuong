@@ -1,0 +1,75 @@
+<?php
+/**
+ * @var array $user
+ */
+?>
+<?php $this->layout('/manager/header') ?>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="tile">
+                <div class="action-header clearfix">
+                    <h1 class="ah-label">Chỉnh sửa tài khoản</h1>
+                    <ul class="ah-actions actions">
+                        <li><a href="<?php echo BASE_URL ?>manager/accounts" title="Trở lại"><i class="zmdi zmdi-arrow-left"></i></a></li>
+                    </ul>
+                </div>
+                <div class="t-body tb-padding">
+                    <?php $this->layout('message') ?>
+                    <form method="POST">
+                        <div class="form-group">
+                            <label class="control-label">Tài khoản</label>
+                            <input type="text" class="form-control" name="username" disabled value="<?php echo $user['username'] ?>"/>
+                            <div class="help-block pull-right">Tên đăng nhập không thể thay đổi</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Tên đầy đủ</label>
+                            <input type="text" class="form-control" name="fullname" placeholder="Nhập tên đầy đủ" value="<?php echo $user['fullname'] ?>"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Email</label>
+                            <input type="text" class="form-control" name="email" placeholder="Nhập email" value="<?php echo $user['email'] ?>"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Số điện thoại</label>
+                            <input type="text" class="form-control" name="phone" placeholder="Nhập số điện thoại" value="<?php echo $user['phone'] ?>"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" name="submit-edit" value="Thêm người quản lý"/>
+                            <a href="<?php echo BASE_URL ?>manager/accounts" class="btn btn-default">Trở lại</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="tile">
+                <div class="action-header clearfix">
+                    <div class="ah-label">Thay đổi mật khẩu</div>
+                    <ul class="ah-actions actions">
+                        <li><a href="<?php echo BASE_URL ?>manager/accounts" title="Trở lại"><i class="zmdi zmdi-arrow-left"></i></a></li>
+                    </ul>
+                </div>
+                <div class="t-body tb-padding">
+                    <?php $this->layout('message', array(MSG_POS => 'change_password')) ?>
+                    <form method="POST">
+                        <div class="form-group">
+                            <label class="control-label">Tài khoản</label>
+                            <input type="text" class="form-control" name="username" disabled value="<?php echo $user['username'] ?>"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Mật khẩu mới</label>
+                            <input type="password" class="form-control" name="password" placeholder="Nhập mật khẩu mới"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Xác nhận mật khẩu mới</label>
+                            <input type="password" class="form-control" name="re-password" placeholder="Nhập lại mật khẩu mới"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" name="submit-change-password" value="Thay đổi mật khẩu"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php $this->layout('/manager/footer') ?>

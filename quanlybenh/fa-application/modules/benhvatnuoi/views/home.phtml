@@ -1,0 +1,79 @@
+<?php
+/**
+ * @var \FA\MODELS\M_BENHVATNUOI\diseases $DSS
+ */
+?>
+<?php $this->layout('/header') ?>
+
+<!-- Carousel
+================================================== -->
+<div class="carousel carousel-cover slide" data-ride="carousel">
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img class="first-slide" src="<?php echo CUR_MODULE_URL ?>/views/assets/images/cover2.jpg" alt="Cover">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>Tìm kiếm bệnh vật nuôi</h1>
+
+                    <form action="<?php echo BASE_URL ?>search">
+                        <div class="form-group">
+                            <input type="text" name="keyword" class="form-control input-lg" placeholder="Nhập tên bệnh cần tìm"/>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-lg" type="submit">Tìm kiếm</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- /.carousel -->
+
+
+<!-- Marketing messaging and featurettes
+================================================== -->
+<!-- Wrap the rest of the page in another container to center all the content. -->
+
+<div class="container marketing">
+
+    <!-- Three columns of text below the carousel -->
+     <div class="row">
+        <div class="col-lg-4">
+            <img class="img-circle" src="<?php echo CUR_MODULE_URL ?>/views/assets/images/lon.jpg" alt="Gia súc" width="140" height="140">
+            <h2>Gia súc</h2>
+            <p>Đây có thể nói là một cuốn cẩm nang cho bà con nông dân về vấn đề chăm sóc sức khỏe cho đàn gia súc nhà mình.</p>
+        </div><!-- /.col-lg-4 --> 
+        <div class="col-lg-4">
+            <img class="img-circle" src="<?php echo CUR_MODULE_URL ?>/views/assets/images/ga.jpg" alt="Gia cầm" width="140" height="140">
+            <h2>Gia cầm</h2>
+            <p>Hiện nay, ở nước ta việc chăn nuôi các loại gia cầm đang rất phổ biến. Đặc biệt là gà, vịt đang được chăn thả trên các cánh đồng, không có quy mô rất dễ phát sinh bệnh.</p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <img class="img-circle" src="<?php echo CUR_MODULE_URL ?>/views/assets/images/cho.jpg" alt="Thú cưng" width="140" height="140">
+            <h2>Thú cưng</h2>
+            <p>Thú cưng cũng là một trong những vật nuôi được quan tâm rất nhiều. Đặc biệt, chúng là những con vật tiếp xúc trực tiếp với con người có thể mang rất nhiều mầm bệnh tiềm ẩn. Do đó, việc chăm sóc sức khỏe và bảo vệ chúng là việc rất quan trọng đối với con người.</p>
+        </div><!-- /.col-lg-4 -->
+    </div> <!-- /.row */ -->
+
+    <?php $DSS->lists(array('limit' => 4)) ?>
+    <?php if ($DSS->has_result('lists')): ?>
+        <hr class="featurette-divider">
+        <div class="row featurette">
+            <?php while ($row = $DSS->fetch('lists')): ?>
+                <div class="col-lg-3 col-xs-6">
+                    <div class="thumbnail">
+                        <a href="<?php echo $row['full_url'] ?>">
+                            <img src="<?php echo $row['full_thumbnail'] ?>" alt="<?php echo $row['name'] ?>"/>
+                        </a>
+                        <div class="caption">
+                            <h3 class="caption-title"><a href="<?php echo $row['full_url'] ?>" title="<?php echo $row['name'] ?>"><?php echo $row['name'] ?></a></h3>
+                            <p><?php echo strip_tags($row['description']) ?></p>
+                        </div>
+                    </div>
+                </div>
+            <?php endwhile ?>
+        </div>
+    <?php endif ?>
+</div><!-- /.container -->
+
+<?php $this->layout('/footer') ?>

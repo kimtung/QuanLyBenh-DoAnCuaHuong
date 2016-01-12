@@ -1,0 +1,89 @@
+<?php
+/**
+ * @var \FA\MODELS\M_BENHVATNUOI\diseases $DSS
+ */
+?>
+<?php $this->layout('/header') ?>
+
+    <!-- Carousel
+    ================================================== -->
+    <div class="carousel carousel-cover carousel-cover-min slide" data-ride="carousel">
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <img class="first-slide" src="<?php echo CUR_MODULE_URL ?>/views/assets/images/cover-min.jpg" alt="Cover">
+                <div class="container">
+                    <div class="carousel-caption">
+                        <form action="<?php echo BASE_URL ?>search">
+                            <div class="form-group">
+                                <input type="text" name="keyword" class="form-control input-lg" placeholder="Nhập tên bệnh cần tìm" value="<?php echo $keyword ?>"/>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-primary btn-lg" type="submit">Tìm kiếm</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- /.carousel -->
+
+
+    <?php if ($keyword): ?>
+        <div class="container">
+            <div class="page-wrapper">
+                <div class="page-pre-header">Kết quả tìm kiếm cho:</div>
+                <h1 class="page-header"><?php echo $keyword ?></h1>
+                <div class="page-body">
+                    <?php $DSS->lists(array('keyword' => $list_keyword, 'limit' => 16, 'page' => $page, 'page_url' => $page_url)) ?>
+                    <?php if (!$DSS->has_result('lists')): ?>
+                        <div class="alert alert-info">Không có kết quả nào phù hợp</div>
+                    <?php else: ?>
+                        <div class="row">
+                            <?php while ($row = $DSS->fetch('lists')): ?>
+                                <div class="col-lg-3 col-xs-6">
+                                    <div class="thumbnail">
+                                        <a href="<?php echo $row['full_url'] ?>">
+                                            <img src="<?php echo $row['full_thumbnail'] ?>" alt="<?php echo $row['name'] ?>"/>
+                                        </a>
+                                        <div class="caption">
+                                            <h3 class="caption-title"><a href="<?php echo $row['full_url'] ?>" title="<?php echo $row['name'] ?>"><?php echo $row['name'] ?></a></h3>
+                                            <p><?php echo strip_tags($row['description']) ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endwhile ?>
+                        </div>
+                        <div class="text-center"><?php echo $DSS->paging('lists') ?></div>
+                    <?php endif ?>
+                </div>
+            </div>
+        </div>
+    <?php else: ?>
+        <div class="container">
+            <div class="page-wrapper">
+                <h1 class="page-header">Danh sách bệnh</h1>
+                <div class="page-body">
+                    <?php $DSS->lists(array('limit' => 16, 'page' => $page, 'page_url' => $page_url)) ?>
+                    <?php if ($DSS->has_result('lists')): ?>
+                        <div class="row">
+                            <?php while ($row = $DSS->fetch('lists')): ?>
+                                <div class="col-lg-3 col-xs-6">
+                                    <div class="thumbnail">
+                                        <a href="<?php echo $row['full_url'] ?>">
+                                            <img src="<?php echo $row['full_thumbnail'] ?>" alt="<?php echo $row['name'] ?>"/>
+                                        </a>
+                                        <div class="caption">
+                                            <h3 class="caption-title"><a href="<?php echo $row['full_url'] ?>" title="<?php echo $row['name'] ?>"><?php echo $row['name'] ?></a></h3>
+                                            <p><?php echo strip_tags($row['description']) ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endwhile ?>
+                        </div>
+                    <?php endif ?>
+                </div>
+            </div>
+        </div>
+    <?php endif ?>
+
+<?php $this->layout('/footer') ?>

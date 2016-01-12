@@ -1,0 +1,30 @@
+<?php $this->layout('/manager/header') ?>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="tile">
+                <div class="action-header clearfix">
+                    <h1 class="ah-label">Xóa loài</h1>
+                    <ul class="ah-actions actions">
+                        <li><a href="<?php echo BASE_URL ?>manager/species" title="Trở lại"><i class="zmdi zmdi-arrow-left"></i></a></li>
+                    </ul>
+                </div>
+                <div class="t-body tb-padding">
+                    <?php $this->layout('message') ?>
+                    <form method="POST">
+                        <div class="form-group">
+                            <label class="control-label">Tên loài</label>
+                            <input type="text" class="form-control" name="name" disabled value="<?php echo $species['name'] ?>"/>
+                        </div>
+                        <div class="alert alert-warning">
+                            Bạn có chắc chắn muốn xóa loài này không?
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" name="submit-delete" value="Đồng ý xóa"/>
+                            <a href="<?php echo BASE_URL ?>manager/species" class="btn btn-default">Trở lại</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php $this->layout('/manager/footer') ?>

@@ -1,0 +1,21 @@
+<?php
+if (!isset($position))
+{
+    $position = 'default';
+}
+$success = $this->message(array(MSG_SUCCESS, $position));
+if ($success)
+{
+    foreach ($success as $item)
+    {
+        echo '<div class="alert alert-success">' . $item . '</div>';
+    }
+}
+$errors = $this->message(array(MSG_ERROR, $position));
+if ($errors)
+{
+    foreach ($errors as $item)
+    {
+        echo '<div class="alert alert-danger">' . $item . '</div>';
+    }
+}

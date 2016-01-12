@@ -1,0 +1,48 @@
+<?php $this->layout('/manager/header') ?>
+    <div class="tile">
+        <div class="action-header clearfix">
+            <h1 class="ah-label">Thêm người quản lý</h1>
+            <ul class="ah-actions actions">
+                <li><a href="<?php echo BASE_URL ?>manager/accounts" title="Trở lại"><i class="zmdi zmdi-arrow-left"></i></a></li>
+            </ul>
+        </div>
+        <div class="t-body tb-padding">
+            <div class="row">
+                <div class="col-lg-6">
+                    <?php $this->layout('message') ?>
+                    <form method="POST">
+                        <div class="form-group">
+                            <label class="control-label">Tên đầy đủ</label>
+                            <input type="text" class="form-control" name="fullname" placeholder="Nhập tên đầy đủ"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Email</label>
+                            <input type="text" class="form-control" name="email" placeholder="Nhập email"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Số điện thoại</label>
+                            <input type="text" class="form-control" name="phone" placeholder="Nhập số điện thoại"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Tên đăng nhập</label>
+                            <input type="text" class="form-control" name="username" placeholder="Tên đăng nhập"/>
+                            <div class="help-block pull-right">Chỉ chứa các ký tự a-z 0-9</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Mật khẩu</label>
+                            <input type="password" class="form-control" name="password" placeholder="Nhập mật khẩu"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Xác nhận mật khẩu</label>
+                            <input type="password" class="form-control" name="re-password" placeholder="Nhập lại mật khẩu"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" name="submit-add" value="Thêm người quản lý"/>
+                            <a href="<?php echo BASE_URL ?>manager/accounts" class="btn btn-default">Trở lại</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php $this->layout('/manager/footer') ?>

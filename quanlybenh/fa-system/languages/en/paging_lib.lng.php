@@ -1,0 +1,2 @@
+<?php
+$lng['Page'] = NULL;

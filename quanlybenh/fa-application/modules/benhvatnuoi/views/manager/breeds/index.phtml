@@ -1,0 +1,70 @@
+<?php
+/**
+ * @var \FA\MODELS\M_BENHVATNUOI\breed $BR
+ * @var \FA\MODELS\M_BENHVATNUOI\species $SPC
+ */
+?>
+<?php $this->layout('/manager/header') ?>
+    <div class="tile">
+        <div class="action-header clearfix">
+            <h1 class="ah-label">Quản lý giống</h1>
+            <ul class="ah-actions actions">
+                <li><a href="<?php echo BASE_URL ?>manager/breeds/add" title="Thêm giống"><i class="zmdi zmdi-plus-circle"></i></a></li>
+            </ul>
+        </div>
+        <div class="t-body">
+            <?php $BR->lists(array('limit' => 10, 'page' => $page, 'page_url' => $page_url)); ?>
+            <?php if ($BR->has_result('lists')): ?>
+                <table class="table table-bordered table-vmiddle bootgrid-table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên giống</th>
+                        <th>Thuộc loài</th>
+                        <th>Ảnh minh họa</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <?php while ($breed = $BR->fetch('lists')): ?>
+                        <tr>
+                            <td><?php echo $breed['id'] ?></td>
+                            <td><?php echo $breed['name'] ?></td>
+                            <td>
+                                <?php if ($SPC->id_exists($breed['sid'])): ?>
+                                    <?php $species = $SPC->data($breed['sid'], 'name'); ?>
+                                    <?php echo $species['name'] ?>
+                                <?php else: ?>
+                                    N/A
+                                <?php endif ?>
+                            </td>
+                            <td>
+                                <?php if ($breed['full_thumbnail']): ?>
+                                    <img src="<?php echo $breed['full_thumbnail'] ?>?v=<?php echo time() ?>" class="img-thumbnail thumb"/>
+                                <?php else: ?>
+                                    N/A
+                                <?php endif ?>
+                            </td>
+                            <td>
+                                <a href="<?php echo BASE_URL ?>manager/breeds/edit/<?php echo $breed['id'] ?>" title="Chỉnh sửa">
+                                    <button class="btn btn-icon btn-info command-edit"><span class="zmdi zmdi-edit"></span></button>
+                                </a>
+                                <a href="<?php echo BASE_URL ?>manager/breeds/delete/<?php echo $breed['id'] ?>" title="Xóa giống này">
+                                    <button class="btn btn-icon btn-info command-delete"><span class="zmdi zmdi-delete"></span></button>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endwhile ?>
+                </table>
+                <?php if ($BR->paging('lists')): ?>
+                    <div class="bootgrid-footer container-fluid">
+                        <?php echo $BR->paging('lists') ?>
+                    </div>
+                <?php endif ?>
+            <?php else: ?>
+                <div class="tb-padding">
+                    <div class="alert alert-info">Không có giống nào</div>
+                </div>
+            <?php endif ?>
+        </div>
+    </div>
+<?php $this->layout('/manager/footer') ?>
