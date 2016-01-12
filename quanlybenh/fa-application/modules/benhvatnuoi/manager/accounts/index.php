@@ -5,6 +5,10 @@
 /**
  * Load account model
  */
+ if(!isset($_SESSION["admin"])) {
+	$this->load->view('manager/accounts/forbidden');
+	return;
+}
 $this->load->model('account');
 /**
  * @var \FA\MODELS\M_BENHVATNUOI\account $ACC

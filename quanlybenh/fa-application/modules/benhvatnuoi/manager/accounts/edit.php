@@ -9,9 +9,21 @@ if (empty($action_id))
 {
     redirect(BASE_URL . 'manager/accounts');
 }
-
 $user_id = $action_id;
-
+if(!isset($_SESSION["admin"])) {
+	if(isset($_SESSION["user"])){
+		$session_user = $_SESSION["user"];
+		if($session_user['id'] !== $user_id){
+			$this->load->view('manager/accounts/forbidden');
+			return;
+		}
+		
+	}else{
+		$this->load->view('manager/accounts/forbidden');
+		return;
+	}
+	
+}
 /**
  * Load account model
  */

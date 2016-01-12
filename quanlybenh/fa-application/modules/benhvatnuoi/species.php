@@ -22,7 +22,7 @@ Class species Extends CORE\FA_Controller
 
         $id = (int) $id;
 
-        if (!$id || !$$SPC->id_exists($id))
+        if (!$id || !$SPC->id_exists($id))
         {
             redirect(BASE_URL . 'search');
         }

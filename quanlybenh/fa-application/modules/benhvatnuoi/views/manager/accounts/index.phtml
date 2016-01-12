@@ -11,7 +11,7 @@
                 <li><a href="<?php echo BASE_URL ?>manager/accounts/add" title="Thêm người quản lý"><i class="zmdi zmdi-plus-circle"></i></a></li>
             </ul>
         </div>
-        <div class="t-body">
+        <div class="t-body">			
             <?php $ACC->list_users() ?>
             <?php if ($ACC->has_result('list_users')): ?>
                 <table class="table table-bordered table-vmiddle bootgrid-table">

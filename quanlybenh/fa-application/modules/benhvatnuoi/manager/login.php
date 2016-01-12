@@ -47,8 +47,13 @@ if (isset($_POST['submit-login']))
         }
         else
         {
-            $acc_model->set_token_login($user_id, $remember);
-            redirect(BASE_URL . 'manager');
+			if($user['protected'] == '1'){
+				$_SESSION["admin"] = $user;
+			}else{
+				$_SESSION["user"] = $user;
+			}			
+			$acc_model->set_token_login($user_id, $remember);			
+			redirect(BASE_URL . 'manager');            
         }
     }
 }

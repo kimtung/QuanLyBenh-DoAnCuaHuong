@@ -2,6 +2,11 @@
 /**
  * @var \FA\MODULES\M_BENHVATNUOI\manager $this
  */
+ if(!isset($_SESSION["admin"])) {
+	$this->load->view('manager/accounts/forbidden');
+	return;
+}
+ 
 if (isset($_POST['submit-add']))
 {
     /**

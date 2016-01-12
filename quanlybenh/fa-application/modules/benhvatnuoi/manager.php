@@ -13,12 +13,15 @@ Class manager Extends CORE\FA_Controller
     public function __construct()
     {
         parent::__construct();
-
+		
         $this->hook->add_action(FA, 'pre_action', function() {
+			
             if (!IS_LOGGED)
             {
+				
                 $login_needed = array('index');
-                if (in_array(CUR_ACTION, $login_needed))
+				$not_login_needed = array('login');
+                if (!in_array(CUR_ACTION, $not_login_needed))
                 {
                     redirect(BASE_URL . 'manager/login');
                 }
@@ -109,6 +112,7 @@ Class manager Extends CORE\FA_Controller
 
     public function accounts($action = '', $action_id = '')
     {
+		
         switch ($action)
         {
             default:
@@ -130,7 +134,7 @@ Class manager Extends CORE\FA_Controller
     {
         require 'manager/login.php';
     }
-
+	
     public function logout()
     {
         /**
@@ -144,7 +148,8 @@ Class manager Extends CORE\FA_Controller
         $acc_model = $this->model->account;
 
         $acc_model->unset_token_login();
+		session_unset();
 
         redirect(BASE_URL . 'manager/login');
-    }
+    }		
 }
