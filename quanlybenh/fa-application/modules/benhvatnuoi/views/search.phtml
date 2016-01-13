@@ -43,7 +43,10 @@
                     <?php if (!$DSS->has_result('lists') && !$SP->has_result('lists') && !$DSSG->has_result('lists')): ?>
                         <div class="alert alert-info">Không có kết quả nào phù hợp</div>
                     <?php else: ?>
-                        <div class="row">
+                        <div class="row">	
+							<div class="col-lg-12 col-xs-12">
+								<h2 style="border-bottom: 1px solid;">Bệnh</h2>
+							</div>						
                             <?php while ($row = $DSS->fetch('lists')): ?>
                                 <div class="col-lg-3 col-xs-6">
                                     <div class="thumbnail">
@@ -65,6 +68,10 @@
                         
                     <?php else: ?>
                         <div class="row">
+						<div class="col-lg-12 col-xs-12">
+							<h2 style="border-bottom: 1px solid;">Loài</h2>
+						</div>
+						
                             <?php while ($row = $SP->fetch('lists')): ?>
                                 <div class="col-lg-3 col-xs-6">
                                     <div class="thumbnail">
@@ -86,6 +93,9 @@
                         
                     <?php else: ?>
                         <div class="row">
+							<div class="col-lg-12 col-xs-12">
+								<h2 style="border-bottom: 1px solid;">Nhóm bệnh</h2>
+							</div>
                             <?php while ($row = $DSSG->fetch('lists')): ?>
                                 <div class="col-lg-3 col-xs-6">
                                     <div class="thumbnail">
@@ -103,32 +113,6 @@
                         <div class="text-center"><?php echo $DSSG->paging('lists') ?></div>
                     <?php endif ?>
 					
-					
-                    <?php if (!$BR->has_result('lists')): ?>
-                        
-                    <?php else: ?>
-                        <div class="row">
-                            <?php while ($row = $BR->fetch('lists')): ?>
-                                <div class="col-lg-3 col-xs-6">
-                                    <div class="thumbnail">
-                                        <a href="<?php echo $row['full_url'] ?>">
-                                            <img src="<?php echo $row['full_thumbnail'] ?>" alt="<?php echo $row['name'] ?>"/>
-                                        </a>
-                                        <div class="caption">
-                                            <h3 class="caption-title"><a href="<?php echo $row['full_url'] ?>" title="<?php echo $row['name'] ?>"><?php echo $row['name'] ?></a></h3>
-                                            <p><?php echo strip_tags($row['description']) ?></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php endwhile ?>
-                        </div>
-                        <div class="text-center"><?php echo $BR->paging('lists') ?></div>
-                    <?php endif ?>
-					
-					
-					
-					
-                    
                 </div>
             </div>
         </div>
