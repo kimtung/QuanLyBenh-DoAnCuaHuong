@@ -36,10 +36,10 @@ if (isset($_POST['submit-add']))
     {
         $this->load->message(MSG_ERROR, 'Tên nhóm bệnh quá dài');
     }
-   /*  elseif ($DSS_GR->name_exists($name))
+    elseif ($DSS_GR->name_exists($name))
     {
         $this->load->message(MSG_ERROR, 'Tên nhóm bệnh đã tồn tại');
-    } */
+    }
     else
     {
         $insert['bid'] = $bid;

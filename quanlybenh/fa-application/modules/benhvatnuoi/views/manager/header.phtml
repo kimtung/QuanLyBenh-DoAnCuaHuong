@@ -26,34 +26,30 @@
         </li>
 
         <?php $this->load->helper('counter') ?>
-		<li>
-            <a href="<?php echo BASE_URL ?>manager/species" title="Danh sách loài">
-                <i class="zmdi zmdi-accounts-list-alt"></i>
-                <i class="hi-count bg-orange"><?php echo counter('species') ?></i>
-            </a>
-        </li>
-		
-		<li>
-            <a href="<?php echo BASE_URL ?>manager/breeds" title="Danh sách giống">
-                <i class="zmdi zmdi-airline-seat-flat-angled"></i>
-                <i class="hi-count bg-blue"><?php echo counter('breed') ?></i>
-            </a>
-        </li>
-		
-		<li>
-            <a href="<?php echo BASE_URL ?>manager/diseases_group" title="Danh sách nhóm bệnh">
-                <i class="zmdi zmdi-group-work"></i>
-                <i class="hi-count bg-green"><?php echo counter('diseases_group') ?></i>
-            </a>
-        </li>
-		
         <li>
             <a href="<?php echo BASE_URL ?>manager/diseases" title="Danh sách bệnh">
                 <i class="zmdi zmdi-collection-text"></i>
                 <i class="hi-count"><?php echo counter('diseases') ?></i>
             </a>
         </li>
-     
+        <li>
+            <a href="<?php echo BASE_URL ?>manager/diseases_group" title="Danh sách nhóm bệnh">
+                <i class="zmdi zmdi-group-work"></i>
+                <i class="hi-count bg-green"><?php echo counter('diseases_group') ?></i>
+            </a>
+        </li>
+        <li>
+            <a href="<?php echo BASE_URL ?>manager/breeds" title="Danh sách giống">
+                <i class="zmdi zmdi-airline-seat-flat-angled"></i>
+                <i class="hi-count bg-blue"><?php echo counter('breed') ?></i>
+            </a>
+        </li>
+        <li>
+            <a href="<?php echo BASE_URL ?>manager/species" title="Danh sách loài">
+                <i class="zmdi zmdi-accounts-list-alt"></i>
+                <i class="hi-count bg-orange"><?php echo counter('species') ?></i>
+            </a>
+        </li>
         <li>
             <a href="<?php echo BASE_URL ?>manager/accounts" title="Danh sách admin">
                 <i class="zmdi zmdi-accounts"></i>
@@ -91,33 +87,33 @@
                         </a>
                         <small>Thống kê</small>
                     </div>
-					
-					<div class="lab-item">
-                        <a href="<?php echo BASE_URL ?>manager/species/add" class="bg-orange" title="Thêm loài">
-                            <i class="zmdi zmdi-accounts-list-alt"></i>
-                        </a>
-                        <small>Loài</small>
-                    </div>
-					
-					<div class="lab-item">
-                        <a href="<?php echo BASE_URL ?>manager/breeds/add" class="bg-blue" title="Thêm giống">
-                            <i class="zmdi zmdi-airline-seat-flat-angled"></i>
-                        </a>
-                        <small>Giống</small>
-                    </div>
-					
-					<div class="lab-item">
-                        <a href="<?php echo BASE_URL ?>manager/diseases_group/add" class="bg-green" title="Thêm nhóm bệnh">
-                            <i class="zmdi zmdi-group-work"></i>
-                        </a>
-                        <small>N bệnh</small>
-                    </div>
 
                     <div class="lab-item">
                         <a href="<?php echo BASE_URL ?>manager/diseases/add" class="bg-red" title="Thêm bệnh">
                             <i class="zmdi zmdi-collection-text"></i>
                         </a>
                         <small>Bệnh</small>
+                    </div>
+
+                    <div class="lab-item">
+                        <a href="<?php echo BASE_URL ?>manager/diseases_group/add" class="bg-green" title="Thêm nhóm bệnh">
+                            <i class="zmdi zmdi-group-work"></i>
+                        </a>
+                        <small>N Bệnh</small>
+                    </div>
+
+                    <div class="lab-item">
+                        <a href="<?php echo BASE_URL ?>manager/breeds/add" class="bg-blue" title="Thêm giống">
+                            <i class="zmdi zmdi-airline-seat-flat-angled"></i>
+                        </a>
+                        <small>Giống</small>
+                    </div>
+
+                    <div class="lab-item">
+                        <a href="<?php echo BASE_URL ?>manager/species/add" class="bg-orange" title="Thêm loài">
+                            <i class="zmdi zmdi-accounts-list-alt"></i>
+                        </a>
+                        <small>Loài</small>
                     </div>
 
                     <div class="lab-item">
@@ -152,8 +148,7 @@
                 </span>
             </a>
             <ul>
-				<li><a href="<?php echo BASE_URL ?>manager/accounts/edit/<?php echo user('id')?>">Thông tin cá nhân</a></li>
-                <li><a href="<?php echo BASE_URL ?>manager/logout">Đăng xuất</a></li>				
+                <li><a href="<?php echo BASE_URL ?>manager/logout">Đăng xuất</a></li>
             </ul>
         </li>
 

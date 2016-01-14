@@ -94,7 +94,6 @@ Class diseases_group extends CORE\FA_Models
         $default_options = array(
             'get'       => '*',
             'bid'       => null,
-			'keyword'   => '',
             'order_by'  => 'id',
             'order_type'=> 'desc',
             'limit'     => 10,
@@ -120,25 +119,6 @@ Class diseases_group extends CORE\FA_Models
          * Where
          */
         $where = array();
-		
-		if ($options['keyword'])
-        {
-            if (!is_array($options['keyword']))
-            {
-                $options['keyword'] = array($options['keyword']);
-            }
-            $search = array();
-            foreach ($options['keyword'] as $key)
-            {
-                $key = $this->db->escape_str($key);
-                $search[] = "`name` LIKE '%" . $key . "%' OR `description` LIKE '%" . $key . "%'";
-            }
-            if ($search)
-            {
-                $where[] = '(' . implode(' OR ', $search) . ')';
-            }
-        }
-		
         if ($options['bid'] !== null)
         {
             $where[] = "`bid` = '" . $options['bid'] . "'";
@@ -293,10 +273,6 @@ Class diseases_group extends CORE\FA_Models
         {
             $data['full_thumbnail'] = $data['thumbnail'] ? BASE_URL . 'fa-application/uploads/' . $data['thumbnail'] : '';
             $data['full_path_thumbnail'] = $data['thumbnail'] ? APP_PATH . 'uploads/' . $data['thumbnail'] : '';
-        }
-		if (isset($data['id']))
-        {
-            $data['full_url'] = BASE_URL . 'group/' . $data['id'];
         }
         return $data;
     }

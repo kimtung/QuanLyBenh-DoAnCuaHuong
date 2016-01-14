@@ -2,7 +2,7 @@
 defined('BASE_PATH') OR exit('No direct script access allowed');
 
 $config['site_title'] = 'Tra cứu bệnh vật nuôi';
-$config['site_email'] = 'huongnguyen.tha@gmail.com';
+$config['site_email'] = 'benhvatnuoi@gmail.com';
 
 $config['base_url'] = '';
 

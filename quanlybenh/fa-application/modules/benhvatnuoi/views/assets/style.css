@@ -4,13 +4,20 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic,700&subset=latin,vietnamese);
 
 body {
-    padding-bottom: 40px;
-    color: black;
+    background-color: #f7f5f5;
+    background-image: url(http://2.bp.blogspot.com/-Cbz-Y1ezxB0/USDif0nOx4I/AAAAAAAAIcw/xpk2AZufA_U/s1600/bg.png);
+    padding-bottom: 0px;
+    color: #5a5a5a;
     font-family: 'Open Sans', sans-serif;
 }
 a, a:hover, a:active, a:focus {
     text-decoration: none;
 }
+
+.out-wrapper {
+    background-color: #FFF;
+}
+
 .header {
     text-align: center;
 }
@@ -175,13 +182,28 @@ a, a:hover, a:active, a:focus {
     margin-right: 10px;
     margin-left: 10px;
 }
-
+#marketing {
+    background-color: #FFFFFF;
+    -moz-box-shadow: 0 0 5px #D3D3D3;
+    -webkit-box-shadow: 0 0 5px ##D3D3D3;
+    box-shadow: 0 0 5px #000000;
+}
 
 /* Featurettes
 ------------------------- */
 
 .featurette-divider {
     margin: 80px 0; /* Space out the Bootstrap <hr> more */
+}
+
+.footer {
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 12px 0 0;
+    border-top: 5px solid #007ABE;
+    background-color: #2E2E2E;
+    color: #CACACA;
+    clear: both;
 }
 
 /* Thin out the marketing headings */

@@ -95,7 +95,6 @@ Class breed extends CORE\FA_Models
             'get'       => '*',
             'sid'       => null,
             'order_by'  => 'id',
-			'keyword'   => '',
             'order_type'=> 'desc',
             'limit'     => 10,
             'offset'    => 0,
@@ -120,25 +119,6 @@ Class breed extends CORE\FA_Models
          * Where
          */
         $where = array();
-		
-		if ($options['keyword'])
-        {
-            if (!is_array($options['keyword']))
-            {
-                $options['keyword'] = array($options['keyword']);
-            }
-            $search = array();
-            foreach ($options['keyword'] as $key)
-            {
-                $key = $this->db->escape_str($key);
-                $search[] = "`name` LIKE '%" . $key . "%' OR `description` LIKE '%" . $key . "%'";
-            }
-            if ($search)
-            {
-                $where[] = '(' . implode(' OR ', $search) . ')';
-            }
-        }
-		
         if ($options['sid'] !== null)
         {
             $where[] = "`sid` = '" . $options['sid'] . "'";
@@ -293,10 +273,6 @@ Class breed extends CORE\FA_Models
         {
             $data['full_thumbnail'] = $data['thumbnail'] ? BASE_URL . 'fa-application/uploads/' . $data['thumbnail'] : '';
             $data['full_path_thumbnail'] = $data['thumbnail'] ? APP_PATH . 'uploads/' . $data['thumbnail'] : '';
-        }
-		if (isset($data['id']))
-        {
-            $data['full_url'] = BASE_URL . 'breed/' . $data['id'];
         }
         return $data;
     }

@@ -12,7 +12,7 @@ if (!function_exists('youtube_id'))
     }
 }
 
-/* if (!function_exists('valid_youtube_url'))
+if (!function_exists('valid_youtube_url'))
 {
     function valid_youtube_url($url) {
         if (!preg_match('/^http:\/\/(?:www\.)?(?:youtube.com|youtu.be)\/(?:watch\?(?=.*v=([\w\-]+))(?:\S+)?|([\w\-]+))$/i', $url))
@@ -21,5 +21,4 @@ if (!function_exists('youtube_id'))
         }
         return true;
     }
-} */
-?>
+}

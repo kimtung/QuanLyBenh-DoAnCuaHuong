@@ -15,15 +15,6 @@ Class search Extends CORE\FA_Controller
         $this->load->model('diseases');
         $DSS = $this->model->diseases;
 
-		$this->load->model('breed');
-        $BR = $this->model->breed;
-		
-		$this->load->model('species');
-        $SP = $this->model->species;
-		
-		$this->load->model('diseases_group');
-        $DSSG = $this->model->diseases_group;
-		
         $data['keyword'] = '';
         $keyword = $this->input->get('keyword', true);
         if ($keyword)
@@ -37,10 +28,6 @@ Class search Extends CORE\FA_Controller
         $data['page_url'] = BASE_URL . 'search?keyword=' . urlencode($keyword) . '&page={page}';
 
         $data['DSS'] = $DSS;
-		$data['BR'] = $BR;
-		$data['SP'] = $SP;
-		$data['DSSG'] = $DSSG;
-		
         $this->load->data('title', 'Tìm kiếm');
         $this->load->view('search', $data);
     }

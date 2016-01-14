@@ -60,10 +60,10 @@ if (isset($_POST['submit-edit']))
     {
         $this->load->message(MSG_ERROR, 'Tên nhóm bệnh quá dài');
     }
-    /* elseif ($DSS_GR->name_exists($name, $dss_id))
+    elseif ($DSS_GR->name_exists($name, $dss_id))
     {
         $this->load->message(MSG_ERROR, 'Tên nhóm bệnh đã tồn tại');
-    } */
+    }
     else
     {
         $update['bid'] = $bid;
@@ -94,10 +94,10 @@ if (isset($_POST['submit-edit']))
                     $this->load->library('seo');
                     $base_file_name = $this->lib->seo->url($name);
                     $file_name = upload_file($path, $_FILES['thumbnail'], $base_file_name, false);
-                     if (!$file_name)
+                    if (!$file_name)
                     {
                         $this->load->message(MSG_ERROR, 'Không thể upload ảnh minh họa');
-                    } 
+                    }
                     else
                     {
                         $u['thumbnail'] = $sub_dir . '/' . $file_name;

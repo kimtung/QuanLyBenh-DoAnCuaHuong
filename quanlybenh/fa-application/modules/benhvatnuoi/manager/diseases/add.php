@@ -56,10 +56,10 @@ if (isset($_POST['submit-add']))
     {
         $this->load->message(MSG_ERROR, 'Tên khoa học của bệnh quá dài');
     }
-    /* elseif ($video && !valid_youtube_url($video))
+    elseif ($video && !valid_youtube_url($video))
     {
         $this->load->message(MSG_ERROR, 'Không đúng định dạng link video từ Youtube');
-    } */
+    }
     else
     {
         $insert['gid'] = $gid;

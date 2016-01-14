@@ -4,11 +4,8 @@ $router['search']           = 'benhvatnuoi/search';
 $router['contact']          = 'benhvatnuoi/contact';
 $router['disease']          = 'benhvatnuoi/disease/index';
 $router['disease/(:num)']   = 'benhvatnuoi/disease/index/$1';
-$router['species']          = 'benhvatnuoi/species/index';
-$router['species/(:num)']   = 'benhvatnuoi/species/index/$1';
 $router['group/(:num)']     = 'benhvatnuoi/group/index/$1';
 $router['manager']          = 'benhvatnuoi/manager/index';
-$router['test']          = 'benhvatnuoi/manager/test';
 
 $router['manager/accounts']                 = 'benhvatnuoi/manager/accounts';
 $router['manager/accounts/(:any)']          = 'benhvatnuoi/manager/accounts/$1';

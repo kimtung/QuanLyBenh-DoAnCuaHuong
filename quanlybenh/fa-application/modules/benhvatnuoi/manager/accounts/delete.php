@@ -5,10 +5,6 @@
 /**
  * @var int $action_id
  */
- if(!isset($_SESSION["admin"])) {
-	$this->load->view('manager/accounts/forbidden');
-	return;
-}
 if (empty($action_id))
 {
     redirect(BASE_URL . 'manager/accounts');
