@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="row">
+        <div class="out-wrapper">
+            <?php
+            /**
+             * @var \FA\MODELS\M_BENHVATNUOI\diseases $DSS
+             */
+            ?>
+            <?php $this->layout('/header') ?>
+
+            <?php if (isset($keyword)): ?>
+                <div class="container">
+                    <div class="page-wrapper">
+                        <p></p>
+                        <div class="page-pre-header">Các bệnh về <?php echo $keyword ?> </div>
+                        <p></p>
+                        <div class="page-body">
+                            <?php
+                            if($q == 'khac'){
+                                $inKeyword = false;
+                            }else{
+                                $inKeyword = true;
+                            }
+                            ?>
+                            <?php $DSS->get_by_species(array('keyword' => $keyword_data, 'limit' => 15, 'page' => $page, 'page_url' => $page_url),$inKeyword) ?>
+                            <?php if (!$DSS->has_result('get_by_species')): ?>
+                                <div class="alert alert-info">Không tìm thấy bệnh <?php echo ($keyword) ?> nào </div>
+                            <?php else: ?>
+                                <div class="row">
+                                    <?php while ($row = $DSS->fetch('get_by_species')): ?>
+                                        <div class="col-lg-3 col-xs-6">
+                                            <div class="thumbnail">
+                                                <a href="<?php echo $row['full_url'] ?>">
+                                                    <img src="<?php echo $row['full_thumbnail'] ?>" alt="<?php echo $row['name'] ?>"/>
+                                                </a>
+                                                <div class="caption">
+                                                    <h3 class="caption-title"><a href="<?php echo $row['full_url'] ?>" title="<?php echo $row['name'] ?>"><?php echo $row['name'] ?></a></h3>
+                                                    <p><?php echo strip_tags($row['description']) ?></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endwhile ?>
+                                </div>
+                                <div class="text-center"><?php echo $DSS->paging('get_by_species') ?></div>
+                            <?php endif ?>
+                        </div>
+                    </div>
+                </div>
+            <?php else: ?>
+                <div class="container">
+                    <div class="page-wrapper">
+                        <h1 class="page-header">Danh sách bệnh</h1>
+                        <div class="page-body">
+                            <?php $DSS->lists(array('limit' => 16, 'page' => $page, 'page_url' => $page_url)) ?>
+                            <?php if ($DSS->has_result('lists')): ?>
+                                <div class="row">
+                                    <?php while ($row = $DSS->fetch('lists')): ?>
+                                        <div class="col-lg-3 col-xs-6">
+                                            <div class="thumbnail">
+                                                <a href="<?php echo $row['full_url'] ?>">
+                                                    <img src="<?php echo $row['full_thumbnail'] ?>" alt="<?php echo $row['name'] ?>"/>
+                                                </a>
+                                                <div class="caption">
+                                                    <h3 class="caption-title"><a href="<?php echo $row['full_url'] ?>" title="<?php echo $row['name'] ?>"><?php echo $row['name'] ?></a></h3>
+                                                    <p><?php echo strip_tags($row['description']) ?></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endwhile ?>
+                                </div>
+                            <?php endif ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endif ?>
+            <?php $this->layout('/footer') ?>
+        </div>
+    </div>
+</div>

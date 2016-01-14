@@ -14,7 +14,7 @@
                         <div class="page-pre-header">Kết quả tìm kiếm cho:</div>
                         <h1 class="page-header"><?php echo $keyword ?></h1>
                         <div class="page-body">
-                            <?php $DSS->lists(array('keyword' => $list_keyword, 'limit' => 16, 'page' => $page, 'page_url' => $page_url)) ?>
+                            <?php $DSS->lists(array('keyword' => $keyword, 'limit' => 16, 'page' => $page, 'page_url' => $page_url)) ?>
                             <?php if (!$DSS->has_result('lists')): ?>
                                     <div class="alert alert-info">Không có kết quả nào phù hợp</div>
                             <?php else: ?>

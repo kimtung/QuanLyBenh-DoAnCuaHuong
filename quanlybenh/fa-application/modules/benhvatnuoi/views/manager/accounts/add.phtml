@@ -7,10 +7,11 @@
             </ul>
         </div>
         <div class="t-body tb-padding">
-            <div class="row">
-                <div class="col-lg-6">
+            <form method="POST">
+                <div class="row">
+                    <div class="col-lg-6">
                     <?php $this->layout('message') ?>
-                    <form method="POST">
+
                         <div class="form-group">
                             <label class="control-label">Tên đầy đủ</label>
                             <input type="text" class="form-control" name="fullname" placeholder="Nhập tên đầy đủ"/>
@@ -36,13 +37,79 @@
                             <label class="control-label">Xác nhận mật khẩu</label>
                             <input type="password" class="form-control" name="re-password" placeholder="Nhập lại mật khẩu"/>
                         </div>
+
                         <div class="form-group">
                             <input type="submit" class="btn btn-primary" name="submit-add" value="Thêm người quản lý"/>
                             <a href="<?php echo BASE_URL ?>manager/accounts" class="btn btn-default">Trở lại</a>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="control-label">Phân quyền cho tài khoản</label>
+
+                        </div>
+                        <table class="table permition">
+                            <tr>
+                                <th>Tên Menu</th>
+                                <th>Truy cập</th>
+                                <th>Thêm</th>
+                                <th>Sửa</th>
+                                <th>Xóa</th>
+                            </tr>
+
+                            <tr>
+                                <td>Quản lý bệnh</td>
+                                <td><input type="checkbox" name="vehicle" value="1"></td>
+                                <td><input type="checkbox" name="vehicle" value="2"></td>
+                                <td><input type="checkbox" name="vehicle" value="3"></td>
+                                <td><input type="checkbox" name="vehicle" value="4"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Quản lý nhóm bệnh</td>
+                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
+                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
+                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
+                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Quản lý loài</td>
+                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
+                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
+                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
+                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Quản lý giống</td>
+                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
+                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
+                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
+                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
+                            </tr>
+                        </table>
+
+                    </div>
             </div>
+
+            </form>
         </div>
     </div>
 <?php $this->layout('/manager/footer') ?>
+
+<style>
+    .permition tr th, .permition tr td{
+        border-right: 1px solid #f0f0f0;
+        text-align: center;
+    }
+    .permition > tbody > tr > th{
+        border-top: none ;
+        border-bottom: 2px solid #3c3c3c ;
+    }
+
+    .permition > tbody > tr > th:last-child, .permition > tbody > tr > td:last-child{
+        border-right: none ;
+    }
+
+</style>

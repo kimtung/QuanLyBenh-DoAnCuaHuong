@@ -33,8 +33,54 @@
                             <label class="control-label">Số điện thoại</label>
                             <input type="text" class="form-control" name="phone" placeholder="Nhập số điện thoại" value="<?php echo $user['phone'] ?>"/>
                         </div>
+
                         <div class="form-group">
-                            <input type="submit" class="btn btn-primary" name="submit-edit" value="Thêm người quản lý"/>
+                            <label class="control-label">Phân quyền cho tài khoản</label>
+
+                        </div>
+                        <table class="table permition">
+                            <tr>
+                                <th>Tên Menu</th>
+                                <th>Truy cập</th>
+                                <th>Thêm</th>
+                                <th>Sửa</th>
+                                <th>Xóa</th>
+                            </tr>
+
+                            <tr>
+                                <td>Quản lý bệnh</td>
+                                <td><input type="checkbox" name="vehicle" value="1"></td>
+                                <td><input type="checkbox" name="vehicle" value="2"></td>
+                                <td><input type="checkbox" name="vehicle" value="3"></td>
+                                <td><input type="checkbox" name="vehicle" value="4"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Quản lý nhóm bệnh</td>
+                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
+                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
+                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
+                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Quản lý loài</td>
+                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
+                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
+                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
+                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Quản lý giống</td>
+                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
+                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
+                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
+                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
+                            </tr>
+                        </table>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" name="submit-edit" value="Cập nhật"/>
                             <a href="<?php echo BASE_URL ?>manager/accounts" class="btn btn-default">Trở lại</a>
                         </div>
                     </form>
