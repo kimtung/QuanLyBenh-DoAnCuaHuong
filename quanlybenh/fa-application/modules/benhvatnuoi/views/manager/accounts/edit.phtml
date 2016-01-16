@@ -38,6 +38,10 @@
                             <label class="control-label">Phân quyền cho tài khoản</label>
 
                         </div>
+                        <?php
+                            $permission = $user['permission'];
+                            $permissionArray = explode('&',$permission);
+                        ?>
                         <table class="table permition">
                             <tr>
                                 <th>Tên Menu</th>
@@ -49,34 +53,34 @@
 
                             <tr>
                                 <td>Quản lý bệnh</td>
-                                <td><input type="checkbox" name="vehicle" value="1"></td>
-                                <td><input type="checkbox" name="vehicle" value="2"></td>
-                                <td><input type="checkbox" name="vehicle" value="3"></td>
-                                <td><input type="checkbox" name="vehicle" value="4"></td>
+                                <td><input type="checkbox" name="permission[]" value="D-R" <?php if(in_array('D-R',$permissionArray))echo "checked" ?> ></td>
+                                <td><input type="checkbox" name="permission[]" value="D-C" <?php if(in_array('D-C',$permissionArray))echo "checked" ?> ></td>
+                                <td><input type="checkbox" name="permission[]" value="D-U" <?php if(in_array('D-U',$permissionArray))echo "checked" ?> ></td>
+                                <td><input type="checkbox" name="permission[]" value="D-D" <?php if(in_array('D-D',$permissionArray))echo "checked" ?> ></td>
                             </tr>
 
                             <tr>
                                 <td>Quản lý nhóm bệnh</td>
-                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
-                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
-                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
-                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
+                                <td><input type="checkbox" name="permission[]" value="G-R" <?php if(in_array('G-R',$permissionArray))echo "checked" ?> ></td>
+                                <td><input type="checkbox" name="permission[]" value="G-C" <?php if(in_array('G-C',$permissionArray))echo "checked" ?> ></td>
+                                <td><input type="checkbox" name="permission[]" value="G-U" <?php if(in_array('G-U',$permissionArray))echo "checked" ?> ></td>
+                                <td><input type="checkbox" name="permission[]" value="G-D" <?php if(in_array('G-D',$permissionArray))echo "checked" ?> ></td>
                             </tr>
 
                             <tr>
                                 <td>Quản lý loài</td>
-                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
-                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
-                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
-                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
+                                <td><input type="checkbox" name="permission[]" value="S-R" <?php if(in_array('S-R',$permissionArray))echo "checked" ?> ></td>
+                                <td><input type="checkbox" name="permission[]" value="S-C" <?php if(in_array('S-C',$permissionArray))echo "checked" ?> ></td>
+                                <td><input type="checkbox" name="permission[]" value="S-U" <?php if(in_array('S-U',$permissionArray))echo "checked" ?> ></td>
+                                <td><input type="checkbox" name="permission[]" value="S-D" <?php if(in_array('S-D',$permissionArray))echo "checked" ?> ></td>
                             </tr>
 
                             <tr>
                                 <td>Quản lý giống</td>
-                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
-                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
-                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
-                                <td><input type="checkbox" name="vehicle" value="Bike"></td>
+                                <td><input type="checkbox" name="permission[]" value="B-R" <?php if(in_array('B-R',$permissionArray))echo "checked" ?> ></td>
+                                <td><input type="checkbox" name="permission[]" value="B-C" <?php if(in_array('B-C',$permissionArray))echo "checked" ?> ></td>
+                                <td><input type="checkbox" name="permission[]" value="B-U" <?php if(in_array('B-U',$permissionArray))echo "checked" ?> ></td>
+                                <td><input type="checkbox" name="permission[]" value="B-D" <?php if(in_array('B-D',$permissionArray))echo "checked" ?> ></td>
                             </tr>
                         </table>
                         <div class="form-group">

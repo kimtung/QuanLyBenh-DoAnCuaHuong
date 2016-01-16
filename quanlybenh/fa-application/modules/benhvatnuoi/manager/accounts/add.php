@@ -19,6 +19,13 @@ if (isset($_POST['submit-add']))
     $username   = $this->input->post('username', true);
     $password   = $this->input->post('password');
     $repassword = $this->input->post('re-password');
+    $permiss = $this->input->post('permission',true);
+    if(is_array($permiss)){
+        $permission = implode("&", $permiss);
+    }
+    else{
+        $permission="";
+    }
 
     if (!$fullname || !$email || !$username || !$password || !$repassword)
     {
@@ -58,6 +65,7 @@ if (isset($_POST['submit-add']))
             $insert['username'] = $username;
             $insert['password'] = $ACC->encrypt_password($password);
             $insert['time_created'] = date("Y-m-d H:i:s");
+            $insert['permission']    = $permission;
             $user_id = $ACC->insert_user($insert);
             if (!$user_id)
             {

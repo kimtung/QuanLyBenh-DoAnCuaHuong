@@ -9,6 +9,7 @@ $router['disease/(:num)']   = 'benhvatnuoi/disease/index/$1';
 $router['group/(:num)']     = 'benhvatnuoi/group/index/$1';
 $router['manager']          = 'benhvatnuoi/manager/index';
 
+$router['manager/forbidden']                 = 'benhvatnuoi/manager/forbidden';
 $router['manager/accounts']                 = 'benhvatnuoi/manager/accounts';
 $router['manager/accounts/(:any)']          = 'benhvatnuoi/manager/accounts/$1';
 $router['manager/accounts/(:any)/(:num)']   = 'benhvatnuoi/manager/accounts/$1/$2';

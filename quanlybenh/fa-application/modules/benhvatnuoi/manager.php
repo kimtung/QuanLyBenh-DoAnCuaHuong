@@ -17,13 +17,38 @@ Class manager Extends CORE\FA_Controller
         $this->hook->add_action(FA, 'pre_action', function() {
             if (!IS_LOGGED)
             {
-                $login_needed = array('index');
-                if (in_array(CUR_ACTION, $login_needed))
+                $not_login_needed = array('login');
+
+                if (!in_array(CUR_ACTION, $not_login_needed))
                 {
                     redirect(BASE_URL . 'manager/login');
                 }
+
+                //$login_needed = array('index');
+                //if (in_array(CUR_ACTION, $login_needed))
+                //{
+                //   redirect(BASE_URL . 'manager/login');
+                //}
+
             }
         });
+    }
+
+    public function checkPermisstion($action = '')
+    {
+        if(!isset($_SESSION["user"])){
+            return false;
+        }
+        $user = $_SESSION["user"];
+        if($user['protected'] == 1){
+            return true;
+        }
+        $permission = $user['permission'];
+        $permissionArray = explode('&',$permission);
+        if(in_array($action ,$permissionArray)){
+            return true;
+        }
+        return false;
     }
 
     public function index()
@@ -33,102 +58,167 @@ Class manager Extends CORE\FA_Controller
 
     public function species($action = '', $action_id = '')
     {
+        $actionPermission = '';
+        $actionRequire = '';
         switch ($action)
         {
             default:
-                require 'manager/species/index.php';
+                $actionRequire = 'manager/species/index.php';
+                $actionPermission = 'S-R';
                 break;
             case 'add':
-                require 'manager/species/add.php';
+                $actionRequire = 'manager/species/add.php';
+                $actionPermission = 'S-C';
                 break;
             case 'edit':
-                require 'manager/species/edit.php';
+                $actionRequire = 'manager/species/edit.php';
+                $actionPermission = 'S-U';
                 break;
             case 'delete':
-                require 'manager/species/delete.php';
+                $actionPermission = 'S-D';
+                $actionRequire = 'manager/species/delete.php';
                 break;
         }
+        if($this->checkPermisstion($actionPermission)){
+            require $actionRequire;
+        }else{
+            redirect(BASE_URL . 'manager/forbidden');
+        }
+
     }
 
     public function breeds($action = '', $action_id = '')
     {
+        $actionPermission = '';
+        $actionRequire = '';
         switch ($action)
         {
             default:
-                require 'manager/breeds/index.php';
+                $actionRequire = 'manager/breeds/index.php';
+                $actionPermission = 'B-R';
                 break;
             case 'add':
-                require 'manager/breeds/add.php';
+                $actionRequire = 'manager/breeds/add.php';
+                $actionPermission = 'B-C';
                 break;
             case 'edit':
-                require 'manager/breeds/edit.php';
+                $actionRequire = 'manager/breeds/edit.php';
+                $actionPermission = 'B-U';
                 break;
             case 'delete':
-                require 'manager/breeds/delete.php';
+                $actionPermission = 'B-D';
+                $actionRequire = 'manager/breeds/delete.php';
                 break;
         }
+        if($this->checkPermisstion($actionPermission)){
+            require $actionRequire;
+        }else{
+            redirect(BASE_URL . 'manager/forbidden');
+        }
+
     }
 
     public function diseases_group($action = '', $action_id = '')
     {
+        $actionPermission = '';
+        $actionRequire = '';
         switch ($action)
         {
             default:
-                require 'manager/diseases_group/index.php';
+                $actionRequire = 'manager/diseases_group/index.php';
+                $actionPermission = 'G-R';
                 break;
             case 'add':
-                require 'manager/diseases_group/add.php';
+                $actionRequire = 'manager/diseases_group/add.php';
+                $actionPermission = 'G-C';
                 break;
             case 'edit':
-                require 'manager/diseases_group/edit.php';
+                $actionRequire = 'manager/diseases_group/edit.php';
+                $actionPermission = 'G-U';
                 break;
             case 'delete':
-                require 'manager/diseases_group/delete.php';
+                $actionPermission = 'G-D';
+                $actionRequire = 'manager/diseases_group/delete.php';
                 break;
+        }
+        if($this->checkPermisstion($actionPermission)){
+            require $actionRequire;
+        }else{
+            redirect(BASE_URL . 'manager/forbidden');
         }
     }
 
     public function diseases($action = '', $action_id = '')
     {
+        $actionPermission = '';
+        $actionRequire = '';
         switch ($action)
         {
             default:
-                require 'manager/diseases/index.php';
+                $actionRequire = 'manager/diseases/index.php';
+                $actionPermission = 'D-R';
                 break;
             case 'add':
-                require 'manager/diseases/add.php';
+                $actionRequire = 'manager/diseases/add.php';
+                $actionPermission = 'D-C';
                 break;
             case 'edit':
-                require 'manager/diseases/edit.php';
+                $actionRequire = 'manager/diseases/edit.php';
+                $actionPermission = 'D-U';
                 break;
             case 'delete':
-                require 'manager/diseases/delete.php';
+                $actionPermission = 'D-D';
+                $actionRequire = 'manager/diseases/delete.php';
                 break;
+        }
+        if($this->checkPermisstion($actionPermission)){
+            require $actionRequire;
+        }else{
+            redirect(BASE_URL . 'manager/forbidden');
         }
     }
 
     public function accounts($action = '', $action_id = '')
     {
-        switch ($action)
-        {
-            default:
-                require 'manager/accounts/index.php';
-                break;
-            case 'add':
-                require 'manager/accounts/add.php';
-                break;
-            case 'edit':
-                require 'manager/accounts/edit.php';
-                break;
-            case 'delete':
-                require 'manager/accounts/delete.php';
-                break;
+        if($this->checkPermisstion()){
+            switch ($action)
+            {
+                default:
+                    require 'manager/accounts/index.php';
+                    break;
+                case 'add':
+                    require 'manager/accounts/add.php';
+                    break;
+                case 'edit':
+                    require 'manager/accounts/edit.php';
+                    break;
+                case 'delete':
+                    require 'manager/accounts/delete.php';
+                    break;
+            };
+        }else{
+            if(isset($_SESSION["user"])){
+                $user = $_SESSION["user"];
+                if($user['id'] == $action_id){
+                    require 'manager/accounts/edit.php';
+                }else{
+                    redirect(BASE_URL . 'manager/forbidden');
+                }
+            }else{
+                redirect(BASE_URL . 'manager/forbidden');
+            }
         }
+
     }
 
     public function login()
     {
         require 'manager/login.php';
+    }
+
+    public function forbidden()
+    {
+        require 'manager/forbidden.php';
     }
 
     public function logout()
@@ -144,6 +234,7 @@ Class manager Extends CORE\FA_Controller
         $acc_model = $this->model->account;
 
         $acc_model->unset_token_login();
+        session_unset();
 
         redirect(BASE_URL . 'manager/login');
     }

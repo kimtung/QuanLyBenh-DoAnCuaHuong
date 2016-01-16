@@ -33,6 +33,13 @@ if (isset($_POST['submit-edit']))
     $fullname   = $this->input->post('fullname', true);
     $email      = $this->input->post('email', true);
     $phone      = $this->input->post('phone', true);
+    $permiss = $this->input->post('permission',true);
+    if(is_array($permiss)){
+        $permission = implode("&", $permiss);
+    }
+    else{
+        $permission="";
+    }
 
     if (!$fullname || !$email)
     {
@@ -57,6 +64,7 @@ if (isset($_POST['submit-edit']))
             $update['fullname'] = $fullname;
             $update['email']    = $email;
             $update['phone']    = $phone;
+            $update['permission']    = $permission;
 
             if (!$ACC->update_user($user_id, $update))
             {

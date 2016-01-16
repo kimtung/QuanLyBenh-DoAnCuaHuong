@@ -63,7 +63,7 @@ Class disease Extends CORE\FA_Controller
         $data['page_url'] = BASE_URL . 'disease/species/'.$q.'?page={page}';
 
         $data['DSS'] = $DSS;
-        $this->load->data('title','Tungck');
+        $this->load->data('title','Danh sách bệnh');
         $this->load->view('type_disease', $data);
     }
 }

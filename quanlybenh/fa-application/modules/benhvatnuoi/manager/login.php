@@ -48,6 +48,7 @@ if (isset($_POST['submit-login']))
         else
         {
             $acc_model->set_token_login($user_id, $remember);
+            $_SESSION["user"] = $user;
             redirect(BASE_URL . 'manager');
         }
     }
