@@ -504,4 +504,159 @@ Class diseases extends CORE\FA_Models
          */
         $this->_query[__FUNCTION__] = $query;
     }
+
+    public function search_lists($options = array())
+    {
+        $default_options = array(
+            'get'       => '*',
+            'keyword'   => '',
+            'gid'       => null,
+            'order_by'  => 'id',
+            'order_type'=> 'desc',
+            'limit'     => 10,
+            'offset'    => 0,
+            'page'      => NULL,
+            'page_url'  => NULL
+        );
+
+        foreach ($default_options as $k => $opt)
+        {
+            if (!isset($options[$k]))
+            {
+                $options[$k] = $opt;
+            }
+        }
+
+        /**
+         * Get
+         */
+        $_get = $this->db->handler_get($options['get']);
+
+        /**
+         * Where
+         */
+        $where = array();
+        if ($options['gid'] !== null)
+        {
+            $options['gid'] = $this->db->escape_str($options['gid']);
+            $where[] = "`gid` = '" . $options['gid'] . "'";
+        }
+        if ($options['keyword'])
+        {
+            //$_where = 'WHERE SP.name LIKE '%" .$options['keyword']. "%' AND BR.sid = SP.id AND DSG.bid = BR.id AND DSG.id = DS.gid ';
+
+            if (!is_array($options['keyword']))
+            {
+                $options['keyword'] = array($options['keyword']);
+            }
+            $search = array();
+            foreach ($options['keyword'] as $key)
+            {
+                //$query_string = "SELECT bvn_diseases.* FROM bvn_diseases, `bvn_breeds` AS BR, `bvn_diseases_group` AS DSG, `bvn_diseases` AS DS WHERE BR.sid = '$sid' AND DSG.bid = BR.id AND DSG.id = DS.gid";
+                $key = $this->db->escape_str($key);
+                $temp = "DS.name LIKE '%" . $key . "%' OR DS.scientific_name LIKE '%" . $key . "%' OR DS.description LIKE '%" . $key . "%'";
+                $temp = $temp. " OR (SP.name LIKE '%" . $key . "%' AND BR.sid = SP.id AND DSG.bid = BR.id AND DSG.id = DS.gid) ";
+                $temp = $temp. "OR (BR.name LIKE '%" . $key . "%' AND DSG.bid = BR.id AND DSG.id = DS.gid) ";
+                $temp = $temp. "OR (DSG.name LIKE '%" . $key . "%' AND DSG.id = DS.gid) ";
+                $search[] = $temp;
+            }
+            if ($search)
+            {
+                $where[] = '(' . implode(' OR ', $search) . ')';
+            }
+        }
+        $_where = '';
+        if ($where)
+        {
+            $_where = ' WHERE ' . implode(' AND ', $where);
+        }
+
+        /**
+         * ORDER
+         */
+        switch ($options['order_by'])
+        {
+            case 'id':
+                $order_by = 'DS.id';
+                break;
+                break;
+            case 'rand':
+                $order_by = 'RAND()';
+                break;
+            default:
+                $order_by = 'DS.id';
+                break;
+        }
+        switch ($options['order_type'])
+        {
+            case 'desc':
+                $order_type = 'DESC';
+                break;
+            case 'asc':
+                $order_type = 'ASC';
+                break;
+            default:
+                $order_type = 'DESC';
+                break;
+        }
+        if ($options['order_by'] == 'rand') $order_type = '';
+
+        $_order = " ORDER BY $order_by $order_type";
+
+        /**
+         * Limit
+         */
+        $_limit = '';
+        if ($options['limit'])
+        {
+            $limit = $options['limit'];
+            if ($options['offset'])
+            {
+                $offset = $options['offset'];
+            }
+            elseif (is_int($options['page']))
+            {
+                /**
+                 * Load paging class
+                 */
+                $this->load->library('paging');
+
+                /**
+                 * Get paging object
+                 *
+                 * @var \FA\LIBRARIES\paging $paging
+                 */
+                $paging = $this->lib->paging;
+
+                $paging->set_limit($limit);
+                $paging->set_page($options['page']);
+                $offset = $paging->offset();
+
+                /**
+                 * Count total
+                 */
+                $query = $this->db->query("SELECT COUNT(DISTINCT DS.id) as total FROM bvn_species AS SP, bvn_breeds AS BR, bvn_diseases_group AS DSG, bvn_diseases AS DS " . $_where);
+                //$query = $this->db->query("SELECT COUNT(id) as total FROM $this->table" . $_where);
+                $row = $query->fetch_assoc();
+                $paging->set_total($row['total']);
+                if ($options['page_url'])
+                {
+                    $page_url = $options['page_url'];
+                }
+                else $page_url = '';
+
+                $this->_paging[__FUNCTION__] = $paging->html($page_url);
+            }
+            $_limit = " LIMIT $limit" . (isset($offset) ? ' OFFSET ' . $offset : '');
+        }
+        /**
+         * Execute query
+         */
+        $query = $this->db->query("SELECT DISTINCT DS.* FROM bvn_species AS SP, bvn_breeds AS BR, bvn_diseases_group AS DSG, bvn_diseases AS DS " . $_where . $_order . $_limit);
+        //$query = $this->db->query("SELECT $_get FROM $this->table" . $_where . $_order . $_limit);
+        /**
+         * Save query
+         */
+        $this->_query[__FUNCTION__] = $query;
+    }
 }

@@ -14,12 +14,12 @@
                         <div class="page-pre-header">Kết quả tìm kiếm cho:</div>
                         <h1 class="page-header"><?php echo $keyword ?></h1>
                         <div class="page-body">
-                            <?php $DSS->lists(array('keyword' => $keyword, 'limit' => 16, 'page' => $page, 'page_url' => $page_url)) ?>
-                            <?php if (!$DSS->has_result('lists')): ?>
+                            <?php $DSS->search_lists(array('keyword' => $keyword, 'limit' => 16, 'page' => $page, 'page_url' => $page_url)) ?>
+                            <?php if (!$DSS->has_result('search_lists')): ?>
                                     <div class="alert alert-info">Không có kết quả nào phù hợp</div>
                             <?php else: ?>
                                 <div class="row">
-                                    <?php while ($row = $DSS->fetch('lists')): ?>
+                                    <?php while ($row = $DSS->fetch('search_lists')): ?>
                                         <div class="col-lg-3 col-xs-6">
                                             <div class="thumbnail">
                                                 <a href="<?php echo $row['full_url'] ?>">
@@ -33,7 +33,7 @@
                                         </div>
                                     <?php endwhile ?>
                                 </div>
-                                <div class="text-center"><?php echo $DSS->paging('lists') ?></div>
+                                <div class="text-center"><?php echo $DSS->paging('search_lists') ?></div>
                             <?php endif ?>
                         </div>
                     </div>
